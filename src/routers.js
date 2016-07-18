@@ -1,18 +1,23 @@
 const router = require('express').Router();
 const postsRouter = require('./posts/router.js');
+const _ = require('lodash');
 
 router.get('/', (req, res) => {
   res.send('Hello, Forum API !!');
 });
 
 router.all('*', (req, res, next) => {
+  const method = req.method;
   const contentType = req.get('Content-Type');
-  if(contentType && contentType.includes('application/json'))
-    {
+
+  console.log(method);
+  if(_.includes(['GET', 'DELETE'], method)) next();
+  else {
+    if(contentType && _.includes('application/json', contentType)){
       next();
+    } else {
+      res.status(400).send('Wrong Content-Type, should be Content-Type:application/json');
     }
-  else{
-    res.status(400).send('Wrong Content-Type, should be Content-Type:application/json');
   }
 });
 
