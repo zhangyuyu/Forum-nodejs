@@ -35,6 +35,9 @@ const postsDB = {
   save(data) {
     const blog = new Blog(data);
     return blog.save();
+  },
+  getAll() {
+    return Blog.find({});
   }
 };
 
