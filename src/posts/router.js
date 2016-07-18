@@ -31,4 +31,12 @@ router.post('/', (req, res) => {
 	});
 });
 
+router.delete('/:id', (req, res) => {
+	postsDB.deletePostById(req.params.id).then((data) => {
+		res.status(200).send();
+	}, (err) => {
+		res.status(500).send(err);
+	});
+});
+
 module.exports = router;

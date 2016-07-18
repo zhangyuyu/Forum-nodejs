@@ -41,6 +41,9 @@ const postsDB = {
   },
   getPostById(id) {
     return Blog.findById(id);
+  },
+  deletePostById(id) {
+    return Blog.findByIdAndRemove(id);
   }
 };
 
