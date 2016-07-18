@@ -24,7 +24,6 @@ router.get('/:id', (req,res) => {
 
 router.post('/', (req, res) => {
 	postsDB.save(req.body).then((data) => {
-		console.log('Save post succeessfully');
 		res.status(201).json(data);
 	}, (err) => {
 		res.status(500).json(err);

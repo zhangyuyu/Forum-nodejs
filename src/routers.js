@@ -10,7 +10,6 @@ router.all('*', (req, res, next) => {
   const method = req.method;
   const contentType = req.get('Content-Type');
 
-  console.log(method);
   if(_.includes(['GET', 'DELETE'], method)) next();
   else {
     if(contentType && _.includes('application/json', contentType)){
