@@ -6,10 +6,9 @@ router.get('/', (req, res) => {
      .send('This is the posts page in Forum!');
 });
 
-router.get('/init', (req, res) => {
-	postsDB.init().then((data) => {
-		console.log('succeed');
-		console.log(data);
+router.post('/', (req, res) => {
+	postsDB.save(req.body).then((data) => {
+		console.log('Save post succeessfully');
 		res.status(200).json(data);
 	}, (err) => {
 		res.status(500).json(err);
