@@ -28,7 +28,7 @@ const blogSchema = new Schema({
         votes: Number,
         favs: Number
       } 
-}
+})
 const Blog = mongoose.model('Blog', blogSchema);
 
 const postsDB = {
