@@ -38,6 +38,9 @@ const postsDB = {
   },
   getAll() {
     return Blog.find({});
+  },
+  getPostById(id) {
+    return Blog.findById(id);
   }
 };
 
