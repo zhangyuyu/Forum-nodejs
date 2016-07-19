@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const postsDB = require('./postsDB.js');
 const _ = require('lodash');
+const ItemNotFound = require('../errors/itemNotFound.js');
 
 router.get('/', (req, res) => {
 	postsDB.getAll().then((data) => {
@@ -10,10 +11,12 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.get('/:id', (req,res) => {
-	postsDB.getPostById(req.params.id).then((data) => {
-		if(_.isEmpty(data)){
-			res.status(404).send('This post is not found!');
+router.get('/:id', (req, res, next) => {
+	const postId = req.params.id;
+
+	postsDB.getPostById(postId).then((data) => {
+		if(_.isEmpty(data)) {
+			return next(new ItemNotFound(`Cannot find post with ${postId}`));
 		} else {
 			res.status(200).json(data);
 		}

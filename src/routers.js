@@ -22,4 +22,11 @@ router.all('*', (req, res, next) => {
 
 router.use('/posts', postsRouter);
 
+router.use((err, req, res, next) => {
+  if(err.type === 'ItemNotFound') {
+     return res.status(404).send(err.message);
+  }
+  return res.status(500).send();
+});
+
 module.exports = router;
