@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/postsDB');
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', (err) => {
+	console.log(`[Error] [${err.name}]: ${err.message}`);
+});
 db.once('open', () => {
-	console.log('connected to mongodb');
+	console.log('Connected to mongodb...');
 });
 
 const Schema = mongoose.Schema;

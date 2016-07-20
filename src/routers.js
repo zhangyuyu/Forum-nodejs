@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const postsRouter = require('./posts/router.js');
 const _ = require('lodash');
+const ContentTypeError = require('./errors/contentTypeError.js');
 
 router.get('/', (req, res) => {
   res.send('Hello, Forum API !!');
@@ -15,7 +16,7 @@ router.all('*', (req, res, next) => {
     if(contentType && _.includes('application/json', contentType)){
       next();
     } else {
-      res.status(400).send('Wrong Content-Type, should be Content-Type:application/json');
+      return next(new ContentTypeError(`Expected "application/json" Content-type, but got "${contentType}"`));
     }
   }
 });
@@ -23,10 +24,19 @@ router.all('*', (req, res, next) => {
 router.use('/posts', postsRouter);
 
 router.use((err, req, res, next) => {
-  if(err.type === 'ItemNotFound') {
-     return res.status(404).send(err.message);
+  const type = err.type;
+  const message = err.message;
+
+  if(type === 'ItemNotFound') {
+     return res.status(404).send(message);
   }
-  return res.status(500).send();
+  if(type === 'ContentTypeError') {
+    return res.status(400).send(message);
+  }
+  if(type === 'DbCommunicationError') {
+    return res.status(500).send(message);
+  }
+  return res.status(500).send(message);
 });
 
 module.exports = router;
