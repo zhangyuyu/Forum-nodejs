@@ -9,6 +9,10 @@ const router = (app) => {
     app.post('/forum-api/blogs', BlogController.save);
 
     app.delete('/forum-api/blogs/:id', BlogController.deleteBlogById);
+
+    app.get('/forum-api', (req, res) => {
+        res.send('Hello, Forum API !');
+    });
 }
 
 module.exports = router;
