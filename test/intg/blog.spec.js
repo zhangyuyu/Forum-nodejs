@@ -2,7 +2,7 @@ const request = require('supertest');
 const should = require('should');
 const app = require('../../app.js');
 
-describe('Blogs integration test : ', () => {
+describe('Blog integration test : ', () => {
 
     const blog = {
         "title": "Test Blog",
@@ -40,7 +40,7 @@ describe('Blogs integration test : ', () => {
                 .end(done);
         });
 
-        it('should get one blog by id', (done) => {
+        it('should get a blog by id', (done) => {
             request(app)
                 .get('/forum-api/blogs/' + id)
                 .expect('Content-Type', /json/)
@@ -48,7 +48,7 @@ describe('Blogs integration test : ', () => {
                 .end(done);
         });
 
-        it('should get all post successfully', (done) => {
+        it('should get all the blogs', (done) => {
             request(app)
                 .get('/forum-api/blogs')
                 .expect(200)
@@ -92,7 +92,7 @@ describe('Blogs integration test : ', () => {
                 });
             });
 
-        it('should delete one blog by id', (done) => {
+        it('should delete a blog by id', (done) => {
             request(app)
                 .delete('/forum-api/blogs/' + id)
                 .expect(200)
