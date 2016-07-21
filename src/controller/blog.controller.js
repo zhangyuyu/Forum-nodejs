@@ -27,7 +27,7 @@ const BlogController = (Blog) => {
 
             Blog.findById(blogId).then((data) => {
                 if(_.isEmpty(data)) {
-                    return next(new ItemNotFound(`Cannot find blog with ${blogId}`));
+                    return next(new ItemNotFound(`Blog ${blogId} is not found!`));
                 }
                 res.status(200).json(data);
             }, (err) => {
