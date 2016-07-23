@@ -2,9 +2,16 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const blogSchema = new Schema({
-    title: String,
+    title: {
+        type: String,
+        required: [true, 'Title is required']
+    },
     author: String,
     body: String,
+    category: {
+        type: String,
+        enum: ['Life', 'Knowledge', 'Other']
+    },
     comments: [
         {
            body: String,

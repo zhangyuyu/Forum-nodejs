@@ -1,9 +1,9 @@
 'use strict'
 
 class DbCommunicationError extends Error {
-	constructor(message) {
+	constructor(message, code) {
 	    super(message);
-	    this.code = '500';
+	    this.code = code;
 	    this.type = 'DbCommunicationError';
 	}
 };

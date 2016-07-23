@@ -99,4 +99,30 @@ describe('Blog integration test : ', () => {
                 .end(done);
             });
     });
+
+    describe('Error handling', ()=>{
+        it('should return 404 when getting blog with invalid post id', function(done){
+            request(app)
+            .get('/forum-api/blogs/123456789')
+            .expect(404, done);
+        });
+
+        it('should return 400 when creating blog with invalid data', function(done){
+            request(app)
+                .post('/forum-api/blogs')
+                .send({
+                    "author":"",
+                    "content":"",
+                    "category": "Study",
+                    "comments":[],
+                    "hidden": false,
+                    "meta": {}
+                })
+                .expect(400)
+                .end((err, res)=>{
+                    should.equal(res.error.text,"Communication with blog db error: ValidationError: Title is required, `Study` is not a valid enum value for path `category`.");
+                    done();
+                });
+        });
+    });
 })
