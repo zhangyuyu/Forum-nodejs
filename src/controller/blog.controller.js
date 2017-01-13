@@ -15,7 +15,11 @@ const BlogController = (Blog) => {
         getAll: (req, res, next) => {
             Blog.find((err, data) => {
                 createDbCommunicationError(err, next);
-                res.status(200).send(data);
+//                res.status(200).send(data);
+                res.render('index', {
+                    title: '若鱼日记',
+                    content: data
+                });
             });
         },
 
