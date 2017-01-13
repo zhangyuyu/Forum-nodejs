@@ -1,25 +1,32 @@
 <html>
 <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Hello World!</h1>
 
-    </br>
+    <div class="container">
+        <div class="jumbotron">
+                <h1 class="text-center">Hello World!</h1>
+            </div>
 
-    <% for(var i=0; i<content.length; i++) {%>
-    <h2>第<%=i+1 %>本</h2>
-          <p>Title: <%= content[i].title %> </p>
-          <p>Author: <%= content[i].author %> </p>
-          <p>Category: <%= content[i].category %> </p>
-          <p>Date: <%= content[i].date %> </p>
+            <% for(var i=0; i<content.length; i++) {%>
+                <div class="col-xs-6 col-lg-4">
+                    <h2 class="well">第<%=i+1 %>本</h2>
+                    <p>Title: <%= content[i].title %> </p>
+                    <p>Author: <%= content[i].author %> </p>
+                    <p>Category: <%= content[i].category %> </p>
+                    <p>Date: <%= content[i].date %> </p>
 
-          <p>Comments:</p>
-          <ul>
-              <% for(var j=0; j<content[i].comments.length; j++) {%>
-                    <li><%= content[i].comments[j].body %></li>
-              <% } %>
-          </ul>
-    <% } %>
+                    <p>Comments:</p>
+                    <ul>
+                      <% for(var j=0; j<content[i].comments.length; j++) {%>
+                            <li><%= content[i].comments[j].body %></li>
+                      <% } %>
+                    </ul>
+                </div>
+            <% } %>
+    </div>
+
 </body>
 </html>
