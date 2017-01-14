@@ -22,6 +22,7 @@ describe('Blog integration test : ', () => {
         ]
     };
 
+/*
     describe('Get blog', () => {
         let id;
         before((done) => {
@@ -58,6 +59,7 @@ describe('Blog integration test : ', () => {
                 .end(done);
             });
     });
+*/
 
     describe('Create blog', () => {
         let id;
